@@ -1,0 +1,38 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Game } from '../models/game';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GamesService {
+  // se crea una variable par almacenar la ruta de la API 
+  API_URI = 'http://localhost:3000/api';
+
+  constructor(private http: HttpClient) { }
+  
+  // se crean las rutas
+  getGames(){
+    return this.http.get(`${this.API_URI}/games`);
+  }
+
+  getGame(id: string){
+    return this.http.get(`${this.API_URI}/games/${id}`); 
+  }
+
+  saveGame(game: Game){
+    return this.http.post(`${this.API_URI}/games`, game);
+  }
+
+  updateGame(id: string|Number, updateGame: Game): Observable<Game>{
+    return this.http.put(`${this.API_URI}/games/${id}`, updateGame)
+  }
+  // updateGame(id: string|number, updateGame: Game): Observable<Game>{
+  //   return this.http.put(`${this.API_URI}/games/${id}`, updateGame);
+  // }
+
+  deleteGame(id: string){
+    return this.http.delete(`${this.API_URI}/games/${id}`);
+  }
+}

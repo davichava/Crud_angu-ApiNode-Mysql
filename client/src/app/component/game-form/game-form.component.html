@@ -1,0 +1,29 @@
+    <div class="col-md-4 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" name="title" [(ngModel)]="game.title" placeholder="title" class="form-control" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <textarea type="text" name="description" [(ngModel)]="game.description" placeholder="description" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="url" name="image" placeholder="image"[(ngModel)]="game.image" class="form-control">
+                    </div>                                  
+                                                                <!-- //se valida con el ? si va a editar si no va a guardar el game -->
+                    <button class="btn btn-info btn-block" (click)="edit ? updateGame() : saveNewGame()">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+        <!-- //se hace un formulario aparte para que traigan los datos de la api para el updateGame -->
+    <div class="col-md-4">
+        <div class="card card-body text-center">
+            <img [src]="game.image == '' ? '/assets/noimage.png': game.image" class="card-img-top">
+                    <!-- //si no tiene titulo con esta validacion se le ponepor defecto -->
+            <h3>{{ game.id }}. {{ game.title == '' ? 'Game title' : game.title }}</h3>
+            <p>{{game.description == '' ? 'Write You Description' : game.description}}</p>
+            <p>{{game.created_at | date: 'yyyy-MM-dd'}}</p>
+        </div>
+    </div>
